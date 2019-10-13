@@ -1,0 +1,55 @@
+1. install django_rest_framework -- drf
+2. install django_rest_swagger
+3. get into env and activate
+4. startproject - newproject-- Ecommerce
+5. startapp - application moduls(as many u wants) in project 
+6. open pycharm in env
+7. then in Ecommerce.settings.py
+8. add modules in installed apps
+9. add database
+10. add models in one app 
+	eg. class vendor(models.Model):
+		add fields
+		class meta:
+		   db_table = 'name'
+
+11. serializer - 
+	class vendorser(ModelSerializer):
+		pass
+		class Meta:
+		    model = vendor
+		    fields = '__all__'  # if wanted to give some fields then go for
+					the tuple('id','name')
+
+12. views -
+	import models, serializer
+	class vendvset(ModelViewSet):
+		queryset
+		class_serializer
+				
+
+13.  app urls - 
+	router = routers.DefaultRouter()
+	router.register(r'vendor', vendvset, basename='')
+14. project url-
+	schema_view = get_swagger_view(title='')
+
+	urlpatterns = [
+	
+	path('', include(router.urls)),
+    	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    	url(r'^$', schema_view)			
+
+
+		]
+15. Pagination if wanted to add:
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+16. makemigration in cmd
+17. migrate
+18. createsuperuser
+19. runserver
+20. Enjoy the swagger with swag
